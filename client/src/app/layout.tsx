@@ -4,10 +4,6 @@ import type { Metadata } from "next";
 import React from "react";
 import "./globals.css";
 
-// import Toast from "@/components/shared/Toast";
-// import ReduxProvider from "@/lib/redux/provider";
-// import { PersistAuth } from "@/utils";
-
 export const metadata: Metadata = {
 	title: "Home | Alpha Apartments",
 	description: "Welcome home",
@@ -21,8 +17,6 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={`${openSans.variable} ${robotoSlab.variable}`}>
-				{/* <Toast /> */}
-				{/* <PersistAuth /> */}
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"
