@@ -211,3 +211,4 @@ COOKIE_PATH = "/"
 COOKIE_HTTPONLY = True
 COOKIE_SECURE = getenv("COOKIE_SECURE", "True") == "True"
 COOKIE_SECURE = False  # dev only
+CELERY_TASK_TRACK_STARTED = True
