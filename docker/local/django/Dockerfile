@@ -34,7 +34,7 @@ RUN addgroup --system django && \
   mkdir -p ${APP_HOME}/staticfiles && \
   chown django:django ${APP_HOME}/staticfiles && \
   chmod 775 ${APP_HOME}/staticfiles && \
-  echo "django ALL=(ALL) NOPASSWD: /bin/chown, /bin/chmod, /bin/mkdir" >> /etc/sudoers
+  echo "django ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
   libpq-dev \

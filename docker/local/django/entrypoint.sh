@@ -32,9 +32,11 @@ END
 
 >&2 echo "PostgreSQL is available"
 
-# Fix permissions for staticfiles directory
+# Fix permissions for staticfiles and migrations directories
 sudo mkdir -p /app/staticfiles
-sudo chown -R django:django /app/staticfiles
+sudo chown -R django:django /app/staticfiles /app/core_apps
 sudo chmod -R 775 /app/staticfiles
+sudo find /app/core_apps -type d -name migrations -exec chmod 775 {} \;
+sudo find /app/core_apps -type d -name migrations -exec chown django:django {} \;
 
 exec "$@"
