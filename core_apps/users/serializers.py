@@ -11,6 +11,7 @@ class CreateUserSerializer(UserCreateSerializer):
         model = User
         fields = ["id", "username", "first_name", "last_name", "password"]
 
+
 class CustomUserSerializer(UserSerializer):
     full_name = serializers.ReadOnlyField(source="get_full_name")
     gender = serializers.ReadOnlyField(source="profile.gender")
