@@ -16,6 +16,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     apartment = serializers.SerializerMethodField()
     average_rating = serializers.SerializerMethodField()
     apartment = serializers.SerializerMethodField()
+    average_rating = serializers.SerializerMethodField()
 
     class Meta:
         model = Profile
@@ -42,6 +43,9 @@ class ProfileSerializer(serializers.ModelSerializer):
             return obj.avatar.url
         except AttributeError:
             return None
+    
+    def get_average_rating(self, obj: Profile):
+        return obj.get_average_rating()
     
     def get_apartment(self, obj: Profile) -> None:
         apartment = obj.user.apartment.first()
