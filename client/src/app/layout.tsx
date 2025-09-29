@@ -3,6 +3,7 @@ import { openSans, robotoSlab } from "@/lib/fonts";
 import type { Metadata } from "next";
 import React from "react";
 import "./globals.css";
+import ReduxProvider from "@/lib/redux/provider";
 
 export const metadata: Metadata = {
 	title: "Home | Alpha Apartments",
@@ -17,14 +18,16 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={`${openSans.variable} ${robotoSlab.variable}`}>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
-					{children}
-				</ThemeProvider>
+				<ReduxProvider>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						{children}
+					</ThemeProvider>
+				</ReduxProvider>
 			</body>
 		</html>
 	);
