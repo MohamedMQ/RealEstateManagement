@@ -15,11 +15,9 @@ export default function Navbar() {
 			</Link>
 
 			<div className="flex items-center gap-4 sm:gap-6 lg:gap-8">
-				{/* placeholder theme switcher component */}
 				<ThemeSwitcher />
 
 				<AuthAvatar />
-				{/* placeholder theme switcher component */}
 				<MobileNavbar />
 			</div>
 		</nav>
