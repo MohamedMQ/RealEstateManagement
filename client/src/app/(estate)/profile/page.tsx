@@ -47,18 +47,10 @@ function ProfilePageContent() {
 								Assigned Issues
 							</TabsTrigger>
 						</TabsList>
-
-						{/* about tabs content */}
 						<About />
-
-						{/* posts tab content */}
 						<Posts />
-
-						{/* issue tab content */}
 						<Issues />
-						{/* report tab content */}
 						<Reports />
-						{/* assigned Issue tab content */}
 						<AssignedIssues />
 					</Tabs>
 				</div>
