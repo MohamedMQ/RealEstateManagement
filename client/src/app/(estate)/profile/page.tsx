@@ -24,6 +24,7 @@ function ProfilePageContent() {
 			<div className="grid items-start gap-4 px-4 pb-4 md:gap-6 md:px-6">
 				<Header />
 
+				{/* the tabs */}
 				<div className="w-full">
 					<Tabs
 						className="dark:border-eerieBlack rounded-lg border"
@@ -46,10 +47,18 @@ function ProfilePageContent() {
 								Assigned Issues
 							</TabsTrigger>
 						</TabsList>
+
+						{/* about tabs content */}
 						<About />
+
+						{/* posts tab content */}
 						<Posts />
+
+						{/* issue tab content */}
 						<Issues />
+						{/* report tab content */}
 						<Reports />
+						{/* assigned Issue tab content */}
 						<AssignedIssues />
 					</Tabs>
 				</div>

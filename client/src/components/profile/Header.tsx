@@ -1,5 +1,4 @@
 "use client";
-
 import ProtectedRoute from "@/components/shared/ProtectedRoutes";
 import { useGetUserProfileQuery } from "@/lib/redux/features/users/usersApiSlice";
 import { useTheme } from "next-themes";

@@ -1,5 +1,6 @@
 FROM docker.io/python:3.12.2-slim-bookworm as python
 
+# Stage 1: Build our dependency wheels
 FROM python AS python-build-stage
 
 ARG BUILD_ENVIRONMENT=local
@@ -13,6 +14,7 @@ COPY ./requirements .
 RUN pip wheel --wheel-dir /usr/src/app/wheels \
   -r ${BUILD_ENVIRONMENT}.txt
 
+# Stage 2: Python run stage.
 FROM python as python-run-stage
 ARG BUILD_ENVIRONMENT=local
 
@@ -67,6 +69,7 @@ COPY --chown=django:django ./docker/local/django/celery/flower/start.sh /start-f
 RUN sed -i 's/\r$//g' /start-flower
 RUN chmod +x /start-flower
 
+
 COPY --chown=django:django . ${APP_HOME}
 
 RUN chown django:django ${APP_HOME}
@@ -74,3 +77,5 @@ RUN chown django:django ${APP_HOME}
 USER django
 
 ENTRYPOINT [ "/entrypoint" ]
+
+

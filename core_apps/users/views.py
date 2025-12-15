@@ -1,6 +1,7 @@
 import logging
 from typing import Optional
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from djoser.social.views import ProviderAuthView
 from rest_framework import status
 from rest_framework.request import Request
@@ -35,7 +36,8 @@ def set_auth_cookies(
     logged_in_cookie_settings = cookie_settings.copy()
     logged_in_cookie_settings["httponly"] = False
     response.set_cookie("logged_in", "true", **logged_in_cookie_settings)
-    
+
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request: Request, *args, **kwargs) -> Response:
         token_res = super().post(request, *args, **kwargs)
@@ -60,7 +62,8 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 logger.error("Access or refresh token not found in login response data")
 
         return token_res
-    
+
+
 class CustomTokenRefreshView(TokenRefreshView):
     def post(self, request: Request, *args, **kwargs) -> Response:
         refresh_token = request.COOKIES.get("refresh")
@@ -68,33 +71,41 @@ class CustomTokenRefreshView(TokenRefreshView):
         if refresh_token:
             request.data["refresh"] = refresh_token
 
-        refresh_res = super().post(request, *args, **kwargs)
+        try:
+            refresh_res = super().post(request, *args, **kwargs)
 
-        if refresh_res.status_code == status.HTTP_200_OK:
-            access_token = refresh_res.data.get("access")
-            refresh_token = refresh_res.data.get("refresh")
+            if refresh_res.status_code == status.HTTP_200_OK:
+                access_token = refresh_res.data.get("access")
+                refresh_token = refresh_res.data.get("refresh")
 
-            if access_token and refresh_token:
-                set_auth_cookies(
-                    refresh_res,
-                    access_token=access_token,
-                    refresh_token=refresh_token,
-                )
+                if access_token and refresh_token:
+                    set_auth_cookies(
+                        refresh_res,
+                        access_token=access_token,
+                        refresh_token=refresh_token,
+                    )
 
-                refresh_res.data.pop("access", None)
-                refresh_res.data.pop("refresh", None)
+                    refresh_res.data.pop("access", None)
+                    refresh_res.data.pop("refresh", None)
 
-                refresh_res.data["message"] = "Access tokens refreshed successfully"
-            else:
-                refresh_res.data["message"] = (
-                    "Access or refresh tokens not found in refresh response data"
-                )
-                logger.error(
-                    "Access or refresh token not found in refresh response data"
-                )
+                    refresh_res.data["message"] = "Access tokens refreshed successfully"
+                else:
+                    refresh_res.data["message"] = (
+                        "Access or refresh tokens not found in refresh response data"
+                    )
+                    logger.error(
+                        "Access or refresh token not found in refresh response data"
+                    )
 
-        return refresh_res
-    
+            return refresh_res
+        except ObjectDoesNotExist:
+            logger.warning("Token refresh failed: User no longer exists")
+            return Response(
+                {"detail": "Token is invalid or user no longer exists"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
+
 class CustomProviderAuthView(ProviderAuthView):
     def post(self, request: Request, *args, **kwargs) -> Response:
         provider_res = super().post(request, *args, **kwargs)
@@ -123,7 +134,8 @@ class CustomProviderAuthView(ProviderAuthView):
                 )
 
         return provider_res
-    
+
+
 class LogoutAPIView(APIView):
     def post(self, request: Request, *args, **kwargs):
         response = Response(status=status.HTTP_204_NO_CONTENT)

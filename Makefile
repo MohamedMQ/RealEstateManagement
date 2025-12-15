@@ -35,4 +35,4 @@ mailpit-volume:
 	docker volume inspect api_estate_prod_mailpit_data
 
 estate-db:
-	docker compose -f local.yml exec postgres psql --username=alphaogilo --dbname=estate
+	docker compose -f local.yml exec postgres psql --username=mohamedMQ --dbname=estate

@@ -104,6 +104,7 @@ class PostCreateAPIView(generics.CreateAPIView):
     def perform_create(self, serializer) -> None:
         serializer.save()
 
+
 class PostUpdateAPIView(generics.UpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer

@@ -102,6 +102,7 @@ services:
       - "5555:5555"
     command: /start-flower
 
+  
   nginx:
     build:
       context: ./docker/local/nginx
@@ -117,6 +118,7 @@ services:
       - api
     networks:
       - estate_prod_nw
+    
 
 networks:
   estate_prod_nw:
@@ -127,3 +129,5 @@ volumes:
   estate_prod_mailpit_data: {}
   logs_store: {}
   estate_redis_prod_data: {}
+
+

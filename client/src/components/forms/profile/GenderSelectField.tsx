@@ -12,15 +12,16 @@ const ClientOnly = dynamic<{ children: React.ReactNode }>(
 	{ ssr: false },
 );
 
-type Gender = "male" | "female";
+type Gender = "male" | "female" | "other";
 
 function isGender(value: any): value is Gender {
-	return ["male", "female"].includes(value);
+	return ["male", "female", "other"].includes(value);
 }
 
 const genderOptions = [
 	{ value: "male", label: "Male" },
 	{ value: "female", label: "Female" },
+	{ value: "other", label: "Other" },
 ];
 
 interface GenderSelectFieldProps {

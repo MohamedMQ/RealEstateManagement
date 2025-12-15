@@ -8,6 +8,7 @@ from core_apps.profiles.models import Profile
 from .models import Apartment
 from .serializers import ApartmentSerializer
 
+
 class ApartmentCreateAPIView(generics.CreateAPIView):
     queryset = Apartment.objects.all()
     serializer_class = ApartmentSerializer
@@ -28,6 +29,7 @@ class ApartmentCreateAPIView(generics.CreateAPIView):
                 },
                 status=status.HTTP_403_FORBIDDEN,
             )
+
 
 class ApartmentDetailAPIView(generics.RetrieveAPIView):
     serializer_class = ApartmentSerializer

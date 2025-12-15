@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-	title: "Home | Real Estate Apartments",
+	title: "Home | Alpha Apartments",
 	description:
-		"Real Estate Apartments Home Page. Create your account to get started.",
+		"Alpha Apartments Home Page. Create your account to get started.",
 };
 
 export default function HomePage() {

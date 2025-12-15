@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from .models import Rating
 
+
 class RatingSerializer(serializers.ModelSerializer):
     rated_user_username = serializers.CharField(write_only=True)
 

@@ -9,12 +9,14 @@ from core_apps.posts.models import Post, Reply
 
 User = get_user_model()
 
+
 class PopularTagSerializer(serializers.ModelSerializer):
     post_count = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Tag
         fields = ["name", "slug", "post_count"]
+
 
 class TopPostSerializer(serializers.ModelSerializer):
     author_username = serializers.ReadOnlyField(source="author.username")

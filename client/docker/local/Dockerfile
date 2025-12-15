@@ -1,7 +1,5 @@
 FROM docker.io/node:20.11-alpine3.18 as base
 
-RUN apk add --no-cache sudo
-
 FROM base as node-build-stage
 
 RUN apk add --no-cache libc6-compat
@@ -24,17 +22,19 @@ COPY --from=node-build-stage /node_modules ./node_modules
 
 COPY . ${APP_HOME}
 
-RUN addgroup -g 1001 -S nodejs && \
+RUN apk add --no-cache sudo && \
+  addgroup -g 1001 -S nodejs && \
   adduser -S nextjs -u 1001 -G nodejs && \
-  echo "nextjs ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+  echo "nextjs ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+  chown -R nextjs:nodejs ${APP_HOME}
 
-RUN chown -R nextjs:nodejs ${APP_HOME}
-
-COPY --chown=nextjs:nodejs ./docker/local/entrypoint.sh /entrypoint
-RUN chmod +x /entrypoint
+COPY docker/local/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 USER nextjs
 
-ENTRYPOINT [ "/entrypoint" ]
+ENTRYPOINT ["/entrypoint.sh"]
 
 CMD [ "npm","run","dev" ]
+
+

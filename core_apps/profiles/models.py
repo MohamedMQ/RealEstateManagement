@@ -26,6 +26,10 @@ class Profile(TimeStampedModel):
             "female",
             _("Female"),
         )
+        OTHER = (
+            "other",
+            _("Other"),
+        )
 
     class Occupation(models.TextChoices):
         Mason = (
@@ -67,7 +71,7 @@ class Profile(TimeStampedModel):
         verbose_name=_("Gender"),
         max_length=10,
         choices=Gender.choices,
-        default=Gender.MALE,
+        default=Gender.OTHER,
     )
     bio = models.TextField(verbose_name=_("Bio"), blank=True, null=True)
     occupation = models.CharField(
@@ -77,11 +81,11 @@ class Profile(TimeStampedModel):
         default=Occupation.TENANT,
     )
     phone_number = PhoneNumberField(
-        verbose_name=_("Phone Number"), max_length=30, default="+212696210112"
+        verbose_name=_("Phone Number"), max_length=30, default="+250784123456"
     )
-    country_of_origin = CountryField(verbose_name=_("Country"), default="MA")
+    country_of_origin = CountryField(verbose_name=_("Country"), default="KE")
     city_of_origin = models.CharField(
-        verbose_name=_("City"), max_length=180, default="Casablanca"
+        verbose_name=_("City"), max_length=180, default="Nairobi"
     )
     report_count = models.IntegerField(verbose_name=_("Report Count"), default=0)
     reputation = models.IntegerField(verbose_name=_("Reputation"), default=100)

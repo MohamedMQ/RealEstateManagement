@@ -5,9 +5,10 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
+
 schema_view = get_schema_view(
     openapi.Info(
-        title="Real Estate Apartments API",
+        title="Alpha Apartments API",
         default_version="v1",
         description="An Apartment Management API for Real Estate",
         contact=openapi.Contact(email="maqbour.moh@gmail.com"),
@@ -34,6 +35,6 @@ urlpatterns = [
     path("api/v1/posts/", include("core_apps.posts.urls")),
 ]
 
-admin.site.site_header = "Real Estate Apartments Admin"
-admin.site.site_title = "Real Estate Apartments Admin Portal"
-admin.site.index_title = "Welcome to Real Estate Apartments Admin Portal"
+admin.site.site_header = "Alpha Apartments Admin"
+admin.site.site_title = "Alpha Apartments Admin Portal"
+admin.site.index_title = "Welcome to Alpha Apartments Admin Portal"

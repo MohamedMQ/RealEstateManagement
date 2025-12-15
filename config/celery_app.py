@@ -5,7 +5,7 @@ from django.conf import settings
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
 
-app = Celery("real_estate_apartments")
+app = Celery("alpha_apartments")
 
 app.config_from_object("django.conf:settings", namespace="CELERY")
 
