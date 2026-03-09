@@ -6,21 +6,20 @@ import AuthAvatar from "@/components/shared/navbar/AuthAvatar";
 
 export default function Navbar() {
 	return (
-		<nav className="flex-between bg-baby_rich border-b-platinum shadow-platinum fixed z-50 w-full gap-5 border-b-2 p-4 sm:p-6 lg:px-12 dark:border-b-0 dark:shadow-none">
-			<Link href="/" className="flex items-center">
-				<HomeModernIcon className="mr-2 size-11 text-lime-500" />
-				<p className="h2-bold font-robotoSlab text-veryBlack dark:text-babyPowder hidden sm:block">
-					Alpha <span className="text-lime-500"> Apartments</span>
-				</p>
-			</Link>
+		<nav className="glass fixed z-50 w-full border-b border-gray-200 dark:border-gray-800 shadow-sm">
+			<div className="flex items-center justify-between px-4 py-3 sm:px-6 lg:px-12">
+				<Link href="/" className="flex items-center gap-2.5 group">
+					<HomeModernIcon className="size-8 text-blue-600 dark:text-blue-400" />
+					<p className="font-bold text-gray-900 dark:text-white hidden sm:block text-lg tracking-tight">
+						Alpha Apartments
+					</p>
+				</Link>
 
-			<div className="flex items-center gap-4 sm:gap-6 lg:gap-8">
-				{/* placeholder theme switcher component */}
-				<ThemeSwitcher />
-
-				<AuthAvatar />
-				{/* placeholder theme switcher component */}
-				<MobileNavbar />
+				<div className="flex items-center gap-2 sm:gap-3">
+					<ThemeSwitcher />
+					<AuthAvatar />
+					<MobileNavbar />
+				</div>
 			</div>
 		</nav>
 	);

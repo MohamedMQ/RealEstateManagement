@@ -1,35 +1,29 @@
-import shockedFace from "@/../public/assets/icons/shocked face.svg";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function NotFound() {
 	return (
-		<>
-			<main className="flex h-screen flex-col items-center justify-center bg-black px-6 py-16 sm:py-24 lg:scroll-px-28">
-				<Image
-					src={shockedFace}
-					alt="shocked face 404"
-					height={200}
-					width={200}
-					priority
-				/>
-				<div className="mx-auto max-w-md text-center">
-					<h1 className="text-platinum text-4xl font-bold tracking-tight sm:text-5xl">
-						Page not found
-					</h1>
-					<p className="mt-6 text-xl leading-7 text-white sm:text-2xl">
-						Sorry, we could not find the page you are looking for.
-					</p>
-					<div className="mt-10 flex justify-center gap-x-6">
-						<Link
-							href="/welcome"
-							className="bg-electricIndigo rounded-3xl px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-lime-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:px-3.5 sm:py-2.5 sm:text-2xl"
-						>
-							Go back home
-						</Link>
-					</div>
+		<main className="flex min-h-screen flex-col items-center justify-center bg-gray-50 dark:bg-gray-950 px-6 py-16">
+			<div className="mx-auto max-w-md text-center">
+				<p className="text-8xl font-black text-blue-600 dark:text-blue-400 sm:text-9xl">
+					404
+				</p>
+
+				<h1 className="mt-4 text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl">
+					Page not found
+				</h1>
+				<p className="mt-3 text-gray-500 dark:text-gray-400 leading-relaxed">
+					Sorry, we could not find the page you are looking for.
+				</p>
+
+				<div className="mt-8">
+					<Link
+						href="/"
+						className="inline-flex items-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 px-6 py-3 text-base font-medium text-white shadow-sm transition-colors"
+					>
+						Go back home
+					</Link>
 				</div>
-			</main>
-		</>
+			</div>
+		</main>
 	);
 }

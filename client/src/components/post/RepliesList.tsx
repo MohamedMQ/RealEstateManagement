@@ -11,8 +11,8 @@ interface ReplyProps {
 export default function RepliesList({ reply }: ReplyProps) {
 	const { theme } = useTheme();
 	return (
-		<div className="flex items-center space-x-3">
-			<Avatar>
+		<div className="flex items-start gap-3 py-3">
+			<Avatar className="ring-2 ring-blue-300 dark:ring-blue-600 ring-offset-1 flex-shrink-0">
 				<AvatarImage
 					src={
 						reply.avatar ??
@@ -21,23 +21,25 @@ export default function RepliesList({ reply }: ReplyProps) {
 							: "/assets/icons/user-profile-light-circle.svg")
 					}
 					alt="Author Avatar"
-					className="border-electricIndigo dark:border-pumpkin rounded-full border-2"
-					width={35}
-					height={35}
+					className="rounded-full"
+					width={36}
+					height={36}
 				/>
 			</Avatar>
-			<div>
-				<p className="flex items-center space-x-2">
-					<span className="dark:text-platinum font-semibold">
+			<div className="flex-1 bg-gray-50 dark:bg-gray-800 rounded-lg px-4 py-3">
+				<div className="flex items-center gap-3 mb-1">
+					<span className="font-semibold text-gray-800 dark:text-white text-sm">
 						@{reply.author_username}
 					</span>
-					<span className="text-electricIndigo text-lg dark:text-lime-500">
+					<span className="text-xs text-gray-400 dark:text-gray-500">
 						{formatDistanceToNow(parseISO(reply.created_at), {
 							addSuffix: true,
 						})}
 					</span>
+				</div>
+				<p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+					{reply.body}
 				</p>
-				<p className="dark:text-platinum text-lg">{reply.body}</p>
 			</div>
 		</div>
 	);

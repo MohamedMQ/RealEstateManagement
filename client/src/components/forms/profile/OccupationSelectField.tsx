@@ -53,11 +53,11 @@ export default function OccupationSelectField({
 
 	return (
 		<div>
-			<label htmlFor="occupation" className="h4-semibold dark:text-babyPowder">
+			<label htmlFor="occupation" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
 				Occupation
 			</label>
 			<div className="mt-1 flex items-center space-x-3">
-				<Briefcase className="dark:text-babyPowder size-8" />
+				<Briefcase className="size-5 text-blue-500" />
 				<ClientOnly>
 					<Controller
 						control={control}

@@ -1,5 +1,4 @@
 import React from "react";
-import { CardDescription } from "../ui/card";
 import Tooltip from "../shared/Tooltip";
 import { BookMarkedIcon, ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
 
@@ -25,26 +24,36 @@ export default function PostActions({
 	isDownvoteLoading,
 }: PostActionsProps) {
 	return (
-		<CardDescription className="mt-2">
-			<p className="flex items-center space-x-2">
-				<Tooltip content="Upvote this post" position="right">
-					<button onClick={handleUpvote} disabled={isUpvoteLoading}>
-						<ThumbsUpIcon className="tab-icon text-electricIndigo hidden sm:block" />
-					</button>
-				</Tooltip>
-				<span className="text-xl-font-baby">{upvotes}</span>
-				<Tooltip content="Downvote this post">
-					<button onClick={handleDownVote} disabled={isDownvoteLoading}>
-						<ThumbsDownIcon className="tab-icon text-electricIndigo hidden sm:block" />
-					</button>
-				</Tooltip>
-				<span className="text-xl-font-baby">{downvotes}</span>
-				<Tooltip content="Bookmark this post">
-					<button onClick={handleBookmarkPost} disabled={isBookmarkLoading}>
-						<BookMarkedIcon className="tab-icon text-electricIndigo hidden sm:block" />
-					</button>
-				</Tooltip>
-			</p>
-		</CardDescription>
+		<div className="flex items-center gap-4">
+			<Tooltip content="Upvote this post" position="right">
+				<button
+					onClick={handleUpvote}
+					disabled={isUpvoteLoading}
+					className="flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors disabled:opacity-50"
+				>
+					<ThumbsUpIcon className="size-5" />
+					<span>{upvotes}</span>
+				</button>
+			</Tooltip>
+			<Tooltip content="Downvote this post">
+				<button
+					onClick={handleDownVote}
+					disabled={isDownvoteLoading}
+					className="flex items-center gap-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors disabled:opacity-50"
+				>
+					<ThumbsDownIcon className="size-5" />
+					<span>{downvotes}</span>
+				</button>
+			</Tooltip>
+			<Tooltip content="Bookmark this post">
+				<button
+					onClick={handleBookmarkPost}
+					disabled={isBookmarkLoading}
+					className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors disabled:opacity-50"
+				>
+					<BookMarkedIcon className="size-5" />
+				</button>
+			</Tooltip>
+		</div>
 	);
 }

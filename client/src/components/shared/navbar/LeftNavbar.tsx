@@ -11,8 +11,8 @@ export default function LeftNavbar() {
 	const { handleLogout, filteredNavLinks, isAuthenticated } =
 		useAuthNavigation();
 	return (
-		<section className="bg-baby_rich light-border custom-scrollbar shadow-platinum sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto border-r p-6 pt-36 max-sm:hidden lg:w-[297px] dark:shadow-none">
-			<div className="flex flex-1 flex-col gap-6">
+		<section className="bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto p-4 pt-20 max-sm:hidden lg:w-[260px]">
+			<div className="flex flex-1 flex-col gap-0.5 mt-4">
 				{filteredNavLinks.map((linkItem) => {
 					const isActive =
 						(pathname.includes(linkItem.path) && linkItem.path.length > 1) ||
@@ -23,45 +23,44 @@ export default function LeftNavbar() {
 							key={linkItem.label}
 							className={`${
 								isActive
-									? "electricIndigo-gradient text-babyPowder rounded-lg"
-									: "text-baby_richBlack"
-							} flex items-center justify-start gap-4 bg-transparent p-4`}
+									? "bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 font-semibold"
+									: "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-200"
+							} flex items-center justify-start gap-3 rounded-lg px-3 py-2.5 transition-colors duration-150`}
 						>
 							<Image
 								src={linkItem.imgLocation}
 								alt={linkItem.label}
-								width={22}
-								height={22}
-								className={`${isActive ? "" : "color-invert"}`}
+								width={20}
+								height={20}
+								className={`${isActive ? "opacity-100" : "opacity-60 dark:opacity-50"} flex-shrink-0 color-invert`}
 							/>
-							<p
-								className={`${isActive ? "base-bold" : "base-medium"} max-lg:hidden`}
-							>
-								{linkItem.label}
-							</p>
+							<p className={`text-sm max-lg:hidden`}>{linkItem.label}</p>
 						</Link>
 					);
 				})}
 			</div>
 
 			{isAuthenticated ? (
-				<div className="flex flex-col gap-3">
+				<div className="flex flex-col gap-2 pb-4">
 					<Button
 						onClick={handleLogout}
-						className="lime-gradient small-medium light-border-2 btn-tertiary text-baby_ballon min-h-[41px] w-full rounded-lg border px-4 py-3 shadow-none"
+						className="w-full rounded-lg bg-red-600 hover:bg-red-700 text-white font-medium shadow-none transition-colors"
 					>
 						Log Out
 					</Button>
 				</div>
 			) : (
-				<div className="flex flex-col gap-3">
-					<Link href="/login">
-						<Button className="lime-gradient small-medium light-border-2 btn-tertiary text-baby_ballon min-h-[41px] w-full rounded-lg border px-4 py-3 shadow-none">
+				<div className="flex flex-col gap-2 pb-4">
+					<Link href="/login" className="w-full">
+						<Button className="w-full rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-none transition-colors">
 							Login
 						</Button>
 					</Link>
-					<Link href="/register">
-						<Button className="electricIndigo-gradient small-medium light-border-2 btn-tertiary text-baby_ballon min-h-[41px] w-full rounded-lg border px-4 py-3 shadow-none">
+					<Link href="/register" className="w-full">
+						<Button
+							variant="outline"
+							className="w-full rounded-lg border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium shadow-none hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+						>
 							Register
 						</Button>
 					</Link>

@@ -20,21 +20,18 @@ export default function ThemeSwitcher() {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger
-				asChild
-				className="cursor-pointer border-none bg-transparent shadow-none"
-			>
-				<Button size="icon">
+			<DropdownMenuTrigger asChild>
+				<Button
+					size="icon"
+					variant="ghost"
+					className="size-9 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+				>
 					<SunIcon
-						className={`size-[1.8rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 ${
-							theme === "light" ? "text-pumpkin" : "text-gray-400"
-						}`}
+						className="size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-amber-500"
 						suppressHydrationWarning
 					/>
 					<MoonIcon
-						className={`absolute size-[1.8rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 ${
-							theme === "light" ? "text-blue-400" : "text-gray-400"
-						}`}
+						className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 text-blue-400"
 						suppressHydrationWarning
 					/>
 					<span className="sr-only">Toggle theme</span>
@@ -42,13 +39,17 @@ export default function ThemeSwitcher() {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent
 				align="end"
-				className="bg-babyPowder dark:bg-richBlack cursor-pointer rounded-md p-2"
+				className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg p-1 min-w-[120px]"
 			>
 				{themeOptions.map(({ value, label }) => (
 					<DropdownMenuItem
 						key={value}
 						onClick={() => setTheme(value)}
-						className={`hover:bg-richBlack dark:hover:bg-gray cursor-pointer ${theme === "light" && value === "light" ? "text-pumpkin" : theme === "dark" && value === "dark" ? "text-blue-400" : theme === "light" ? "text-richBlack hover:text-babyPowder" : "text-babyPowder"}`}
+						className={`rounded-md cursor-pointer text-sm font-medium transition-colors ${
+							theme === value
+								? "bg-blue-600 text-white"
+								: "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-200"
+						}`}
 					>
 						{label}
 					</DropdownMenuItem>

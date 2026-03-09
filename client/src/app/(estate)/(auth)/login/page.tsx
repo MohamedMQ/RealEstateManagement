@@ -6,20 +6,22 @@ import { useRedirectIfAuthenticated } from "@/hooks";
 export default function LoginPage() {
 	useRedirectIfAuthenticated();
 	return (
-		<div>
-			<AuthFormHeader
-				title="Login to your account"
-				staticText="Don't have an account?"
-				linkText="Register Here"
-				linkHref="/register"
-			/>
-			<div className="mt-7 sm:mx-auto sm:w-full sm:max-w-[480px]">
-				<div className="bg-lightGrey dark:bg-deepBlueGrey rounded-xl px-6 py-12 shadow sm:rounded-lg sm:px-12 md:rounded-3xl">
+		<div className="min-h-[calc(100vh-5rem)] flex items-center justify-center py-10 px-4">
+			<div className="w-full max-w-md">
+				<AuthFormHeader
+					title="Welcome back"
+					staticText="Don't have an account?"
+					linkText="Register here"
+					linkHref="/register"
+				/>
+				<div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm p-7">
 					<LoginForm />
-					<div className="flex-center mt-5 space-x-2">
-						<div className="bg-richBlack dark:bg-platinum h-px flex-1"></div>
-						<span className="dark:text-platinum px-2 text-sm">Or</span>
-						<div className="bg-richBlack dark:bg-platinum h-px flex-1"></div>
+					<div className="flex items-center gap-3 my-5">
+						<div className="flex-1 h-px bg-gray-200 dark:bg-gray-800" />
+						<span className="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+							or continue with
+						</span>
+						<div className="flex-1 h-px bg-gray-200 dark:bg-gray-800" />
 					</div>
 					<OauthButtons />
 				</div>

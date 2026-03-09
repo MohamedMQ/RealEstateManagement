@@ -34,7 +34,7 @@ export default function ActivationPage({ params }: ActivationProps) {
 	return (
 		<div className="flex min-h-screen items-center justify-center">
 			<div className="text-center">
-				<h3 className="dark:text-platinum font-robotoSlab text-2xl font-bold text-gray-800 sm:text-4xl md:text-5xl">
+				<h3 className="dark:text-gray-100 text-2xl font-bold text-gray-800 sm:text-4xl md:text-5xl">
 					{isLoading ? (
 						<div className="flex-center">
 							<span className="mr-2">⏰</span>

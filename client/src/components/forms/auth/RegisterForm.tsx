@@ -64,7 +64,9 @@ export default function RegisterForm() {
 					register={register}
 					errors={errors}
 					placeholder="Username"
-					startIcon={<UserCheck2 className="dark:text-babyPowder size-8" />}
+					startIcon={
+						<UserCheck2 className="size-5 text-blue-500 dark:text-blue-400" />
+					}
 				/>
 
 				<FormFieldComponent
@@ -73,7 +75,9 @@ export default function RegisterForm() {
 					register={register}
 					errors={errors}
 					placeholder="First Name"
-					startIcon={<Contact2Icon className="dark:text-babyPowder size-8" />}
+					startIcon={
+						<Contact2Icon className="size-5 text-blue-500 dark:text-blue-400" />
+					}
 				/>
 
 				<FormFieldComponent
@@ -82,7 +86,9 @@ export default function RegisterForm() {
 					register={register}
 					errors={errors}
 					placeholder="Last Name"
-					startIcon={<Contact2Icon className="dark:text-babyPowder size-8" />}
+					startIcon={
+						<Contact2Icon className="size-5 text-blue-500 dark:text-blue-400" />
+					}
 				/>
 
 				<FormFieldComponent
@@ -91,7 +97,9 @@ export default function RegisterForm() {
 					register={register}
 					errors={errors}
 					placeholder="Email Address"
-					startIcon={<MailIcon className="dark:text-babyPowder size-8" />}
+					startIcon={
+						<MailIcon className="size-5 text-blue-500 dark:text-blue-400" />
+					}
 				/>
 
 				<FormFieldComponent
@@ -113,10 +121,10 @@ export default function RegisterForm() {
 				/>
 				<Button
 					type="submit"
-					className="h4-semibold bg-eerieBlack dark:bg-pumpkin w-full text-white"
+					className="w-full rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 transition-colors"
 					disabled={isLoading}
 				>
-					{isLoading ? <Spinner size="sm" /> : `Submit`}
+					{isLoading ? <Spinner size="sm" /> : `Create Account`}
 				</Button>
 			</form>
 		</main>

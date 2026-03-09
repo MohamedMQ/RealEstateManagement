@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { setSearchTerm } from "@/lib/redux/features/users/userSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks/typedHooks";
-import Image from "next/image";
+import { Search } from "lucide-react";
 import React from "react";
 
 const UsersSearch = () => {
@@ -14,20 +14,14 @@ const UsersSearch = () => {
 		dispatch(setSearchTerm(event.target.value));
 	};
 	return (
-		<div className="bg-gray dark:bg-eerieBlack mb-3 flex min-h-[56px] w-full grow rounded-full">
-			<Image
-				src="/assets/icons/search.svg"
-				alt="Search"
-				width={24}
-				height={24}
-				className="mx-3"
-			/>
+		<div className="relative mb-4 flex items-center">
+			<Search className="absolute left-3.5 size-4 text-blue-500 dark:text-blue-400 pointer-events-none" />
 			<Input
 				placeholder="Search by username, first or last name"
 				type="search"
 				value={searchTerm}
 				onChange={handleInputChange}
-				className="search-text no-focus dark:text-babyPowder border-none bg-transparent shadow-none outline-none"
+				className="pl-10 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus-visible:ring-blue-500 focus-visible:border-blue-500 h-11"
 			/>
 		</div>
 	);

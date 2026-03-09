@@ -1,34 +1,28 @@
-import { useGetSinglePostQuery } from "@/lib/redux/features/posts/postApiSlice";
-import { useGetUserProfileQuery } from "@/lib/redux/features/users/usersApiSlice";
 import React from "react";
-import { CardContent, CardDescription } from "../ui/card";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { PenSquare } from "lucide-react";
 
 interface PostBodyProps {
 	body: string | undefined;
 	slug: string | undefined;
+	canUpdate?: boolean;
 }
 
-export default function PostBody({ body, slug }: PostBodyProps) {
-	const { data: currentUser } = useGetUserProfileQuery();
-	const { data } = useGetSinglePostQuery(slug || "");
-	const canUpdate =
-		data?.post.author_username === currentUser?.profile.username;
+export default function PostBody({ body, slug, canUpdate }: PostBodyProps) {
 	return (
-		<CardContent className="border-b-eerieBlack dark:border-gray border-b border-dashed">
-			<CardDescription className="mt-3">
-				<div className="flex items-center space-x-2">
-					<span className="text-lg-font-baby">{body}</span>
-				</div>
-				{canUpdate && (
-					<Link href={`/post/update-post/${slug}`}>
-						<Button className="lime-gradient text-babyPowder mt-3.5">
-							Update Post
-						</Button>
-					</Link>
-				)}
-			</CardDescription>
-		</CardContent>
+		<div className="border-b border-gray-100 dark:border-gray-800 px-6 py-5">
+			<p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base">
+				{body}
+			</p>
+			{canUpdate && (
+				<Link href={`/post/update-post/${slug}`}>
+					<Button className="mt-4 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium gap-2 transition-colors">
+						<PenSquare className="size-4" />
+						Update Post
+					</Button>
+				</Link>
+			)}
+		</div>
 	);
 }

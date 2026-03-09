@@ -2,18 +2,11 @@
 
 import { useGetPostsByTagQuery } from "@/lib/redux/features/posts/postApiSlice";
 import Spinner from "../shared/Spinner";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "../ui/card";
 import { formatDate, getRepliesText, getViewText } from "@/utils";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { EyeIcon, MessageSquareQuoteIcon } from "lucide-react";
+import { EyeIcon, Hash, MessageSquareQuoteIcon } from "lucide-react";
 
 interface SlugParamsProps {
 	params: {
@@ -34,67 +27,65 @@ export default function PostTagCard({ params }: SlugParamsProps) {
 	const posts = data?.posts_by_tag.results || [];
 
 	return (
-		<div>
-			<h1 className="flex-center font-robotoSlab dark:text-pumpkin text-4xl">
-				Posts tagged with{" "}
-				<span className="text-electricIndigo ml-1 dark:text-lime-500">
-					&ldquo;{params.tagSlug}&rdquo;
-				</span>
-			</h1>
-			<div className="mt-6 grid grid-cols-2 gap-6">
+		<div className="space-y-6">
+			<div className="flex items-center gap-2">
+				<Hash className="size-7 text-blue-600" />
+				<h1 className="text-2xl font-bold text-gray-800 dark:text-white">
+					Posts tagged with{" "}
+					<span className="text-blue-600">&ldquo;{params.tagSlug}&rdquo;</span>
+				</h1>
+			</div>
+			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				{posts.map((post) => (
-					<Card key={post.id} className="dark:border-gray rounded-lg border">
-						<CardHeader className="dark:text-platinum w-full pb-4">
-							<CardTitle className="font-robotoSlab text-center text-2xl">
-								{post.title.length > 25
-									? `${post.title.substring(0, 25)}....`
+					<div
+						key={post.id}
+						className="card-hover rounded-lg border-l-4 border-l-blue-500 border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900"
+					>
+						<div className="p-5">
+							<h3 className="font-semibold text-gray-800 dark:text-white text-lg mb-1">
+								{post.title.length > 40
+									? `${post.title.substring(0, 40)}...`
 									: post.title}
-							</CardTitle>
-							<CardDescription>
-								<div className="flex flex-row justify-between">
-									<div>
-										<span>Posted on</span>
-										<span className="dark:text-pumpkin ml-1">
-											{formatDate(post.created_at).toString()}
-										</span>
-									</div>
-									<div>
-										<span>Last Updated</span>
-										<span className="dark:text-pumpkin ml-1">
-											{formatDistanceToNow(parseISO(post.updated_at), {
-												addSuffix: true,
-											})}
-										</span>
-									</div>
-								</div>
-							</CardDescription>
-						</CardHeader>
-						<CardContent className="border-t-deepBlueGrey dark:border-gray border-y py-4 text-sm">
-							<p className="dark:text-platinum">
-								{post.body.length > 65
-									? `${post.body.substring(0, 65)}....`
+							</h3>
+
+							<div className="flex text-xs text-gray-400 dark:text-gray-500 gap-3 mb-3">
+								<span>Posted {formatDate(post.created_at).toString()}</span>
+								<span>
+									Updated{" "}
+									{formatDistanceToNow(parseISO(post.updated_at), {
+										addSuffix: true,
+									})}
+								</span>
+							</div>
+
+							<p className="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">
+								{post.body.length > 80
+									? `${post.body.substring(0, 80)}...`
 									: post.body}
 							</p>
-						</CardContent>
 
-						<div className="flex flex-row items-center justify-between p-2">
-							<div>
+							<div className="flex items-center justify-between">
 								<Link href={`/post/${post.slug}`}>
-									<Button size="sm" className="lime-gradient text-babyPowder">
+									<Button
+										size="sm"
+										className="rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+									>
 										View Post
 									</Button>
 								</Link>
-							</div>
-							<div className="flex-row-center dark:text-platinum">
-								<EyeIcon className="post-icon text-electricIndigo mr-1" />
-								{getViewText(post.view_count)}
-							</div>
-							<div className="flex-row-center dark:text-platinum">
-								<MessageSquareQuoteIcon className="post-icon text-electricIndigo mr-1" />
-								<span>{getRepliesText(post.replies_count)}</span>
+								<div className="flex items-center gap-3 text-sm text-gray-400 dark:text-gray-500">
+									<span className="flex items-center gap-1">
+										<EyeIcon className="size-4 text-blue-500" />
+										{getViewText(post.view_count)}
+									</span>
+									<span className="flex items-center gap-1">
+										<MessageSquareQuoteIcon className="size-4 text-blue-500" />
+										{getRepliesText(post.replies_count)}
+									</span>
+								</div>
 							</div>
 						</div>
-					</Card>
+					</div>
 				))}
 			</div>
 		</div>

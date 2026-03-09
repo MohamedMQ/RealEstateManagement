@@ -12,15 +12,14 @@ import {
 import Spinner from "../shared/Spinner";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "../ui/card";
 import { formatDistanceToNow, parseISO } from "date-fns";
-import { EyeIcon, MessageSquareQuoteIcon } from "lucide-react";
+import {
+	ArrowRight,
+	Clock,
+	Eye,
+	MessageSquare,
+	PlusCircle,
+} from "lucide-react";
 import PaginationSection from "../shared/PaginationSection";
 
 export default function PostCard() {
@@ -44,88 +43,96 @@ export default function PostCard() {
 	}
 
 	return (
-		<>
-			<div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
-				<h1 className="font-robotoSlab dark:text-pumpkin text-5xl">
-					All Posts - ({data?.posts.results.length})
-				</h1>
-
-				<Link href="/add-post" className="flex justify-end max-sm:w-full">
-					<Button className="h3-semibold electricIndigo-gradient text-babyPowder min-h-[46px] px-4 py-3">
-						Create a Post
+		<div className="animate-fade-in-up">
+			<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+				<div>
+					<h1 className="font-bold text-2xl sm:text-3xl text-gray-900 dark:text-white">
+						Community Posts
+					</h1>
+					<p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
+						{data?.posts.results.length ?? 0} posts from your community
+					</p>
+				</div>
+				<Link href="/add-post" className="self-start sm:self-auto">
+					<Button className="inline-flex items-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2.5 transition-colors">
+						<PlusCircle className="size-4" />
+						New Post
 					</Button>
 				</Link>
 			</div>
 
-			<div className="mt-7 grid grid-cols-2 gap-6">
+			<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 				{sortedPosts && sortedPosts.length > 0 ? (
 					sortedPosts.map((postItem) => (
-						<Card
+						<article
 							key={postItem.id}
-							className="dark:border-gray rounded-lg border"
+							className="group flex flex-col bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:shadow-md transition-all duration-200"
 						>
-							<CardHeader className="dark:text-platinum w-full pb-4">
-								<CardTitle className="font-robotSlab text-center text-2xl">
-									{postItem.title.length > 25
-										? `${postItem.title.substring(0, 25)}....`
-										: postItem.title}
-								</CardTitle>
-								<CardDescription>
-									<div className="flex flex-row justify-between">
-										<div>
-											<span>Posted on</span>
-											<span className="dark:text-pumpkin ml-1">
-												{formatDate(postItem.created_at).toString()}
-											</span>
-										</div>
-									</div>
+							<div className="p-5 flex flex-col flex-1">
+								<h2 className="font-semibold text-base text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
+									{postItem.title}
+								</h2>
 
-									<div>
-										<span>Last Updated</span>
-										<span className="dark:text-pumpkin ml-1">
-											{formatDistanceToNow(parseISO(postItem.updated_at), {
-												addSuffix: true,
-											})}
-										</span>
-									</div>
-								</CardDescription>
-							</CardHeader>
-
-							<CardContent className="border-t-deepBlueGrey dark:border-gray border-y py-4 text-sm">
-								<p className="dark:text-platinum">
-									{postItem.body.length > 65
-										? `${postItem.body.substring(0, 65)}....`
+								<p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4 flex-1">
+									{postItem.body.length > 120
+										? `${postItem.body.substring(0, 120)}…`
 										: postItem.body}
 								</p>
-							</CardContent>
 
-							<div className="flex flex-row items-center justify-between p-2">
-								<div className="">
+								<div className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500 mb-3">
+									<Clock className="size-3" />
+									<span>{formatDate(postItem.created_at).toString()}</span>
+									<span className="text-gray-300 dark:text-gray-600">·</span>
+									<span>
+										{formatDistanceToNow(parseISO(postItem.updated_at), {
+											addSuffix: true,
+										})}
+									</span>
+								</div>
+
+								<div className="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-800">
 									<Link href={`/post/${postItem.slug}`}>
-										<Button size="sm" className="lime-gradient text-babyPowder">
-											View Post
-										</Button>
+										<span className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 inline-flex items-center gap-1 transition-colors">
+											Read more
+											<ArrowRight className="size-3" />
+										</span>
 									</Link>
-								</div>
 
-								<div className="flex-row-center dark:text-platinum">
-									<EyeIcon className="post-icon text-electricIndigo mr-1" />
-									{getViewText(postItem.view_count)}
-								</div>
-
-								<div className="flex-row-center dark:text-platinum">
-									<MessageSquareQuoteIcon className="post-icon text-electricIndigo mr-1" />
-									<span>{getRepliesText(postItem.replies_count)}</span>
+									<div className="flex items-center gap-3 text-xs text-gray-400 dark:text-gray-500">
+										<span className="flex items-center gap-1">
+											<Eye className="size-3.5" />
+											{getViewText(postItem.view_count)}
+										</span>
+										<span className="flex items-center gap-1">
+											<MessageSquare className="size-3.5" />
+											{getRepliesText(postItem.replies_count)}
+										</span>
+									</div>
 								</div>
 							</div>
-						</Card>
+						</article>
 					))
 				) : (
-					<p className="h2-semibold dark:text-lime-500">No Posts Found!</p>
+					<div className="col-span-2 flex flex-col items-center justify-center py-20 text-center">
+						<MessageSquare className="size-10 mb-3 text-gray-300 dark:text-gray-600" />
+						<p className="text-base font-medium text-gray-500 dark:text-gray-400">
+							No posts yet — be the first to share something!
+						</p>
+						<Link href="/add-post" className="mt-4">
+							<Button
+								size="sm"
+								className="rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium"
+							>
+								Create post
+							</Button>
+						</Link>
+					</div>
 				)}
 			</div>
 
-			<PaginationSection totalPages={totalPages} entityType="post" />
-		</>
+			<div className="mt-6">
+				<PaginationSection totalPages={totalPages} entityType="post" />
+			</div>
+		</div>
 	);
 }

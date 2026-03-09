@@ -84,7 +84,7 @@ function CreatePostFormContent() {
 					register={register}
 					errors={errors}
 					placeholder="Post Title"
-					startIcon={<FileText className="dark:text-babyPowder size-8" />}
+					startIcon={<FileText className="size-5 text-blue-500" />}
 				/>
 				<FormFieldComponent
 					label="Body"
@@ -94,7 +94,10 @@ function CreatePostFormContent() {
 					placeholder="Ask a question or share what you have in mind..."
 					isTextArea
 				/>
-				<label htmlFor="tags" className="h4-semibold dark:text-babyPowder">
+				<label
+					htmlFor="tags"
+					className="text-sm font-semibold text-gray-700 dark:text-gray-300"
+				>
 					Tags (press Enter to add a tag)
 				</label>
 				<Controller
@@ -106,7 +109,7 @@ function CreatePostFormContent() {
 								{field.value.map((tag: string, index: number) => (
 									<Badge
 										key={index}
-										className="border-veryBlack dark:border-pumpkin mb-2 mr-2 inline-flex items-center border dark:text-lime-500"
+										className="border-gray-200 dark:border-gray-800 mb-2 mr-2 inline-flex items-center border text-blue-600 dark:text-blue-500 rounded-full px-2 py-0.5 text-xs font-medium"
 									>
 										{tag}
 										<button
@@ -136,7 +139,7 @@ function CreatePostFormContent() {
 
 				<Button
 					type="submit"
-					className="h4-semibold bg-eerieBlack dark:bg-pumpkin w-full text-white"
+					className="w-full rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium h-11 transition-colors"
 					disabled={isLoading}
 				>
 					{isLoading ? <Spinner size="sm" /> : `Create Your Post`}

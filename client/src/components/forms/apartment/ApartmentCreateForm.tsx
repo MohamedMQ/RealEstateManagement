@@ -60,7 +60,7 @@ export default function ApartmentCreateForm() {
 					errors={errors}
 					placeholder="Building Name"
 					startIcon={
-						<BuildingOfficeIcon className="dark:text-babyPowder size-8" />
+						<BuildingOfficeIcon className="size-5 text-blue-500" />
 					}
 				/>
 
@@ -70,9 +70,9 @@ export default function ApartmentCreateForm() {
 					register={register}
 					errors={errors}
 					placeholder="Apartment Number"
-					startIcon={<HomeIcon className="dark:text-babyPowder size-8" />}
+					startIcon={<HomeIcon className="size-5 text-blue-500" />}
 				/>
-				<label htmlFor="floor" className="h4-semibold dark:text-babyPowder">
+				<label htmlFor="floor" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
 					Apartment Floor
 				</label>
 				<Controller
@@ -94,7 +94,7 @@ export default function ApartmentCreateForm() {
 
 				<Button
 					type="submit"
-					className="h4-semibold bg-eerieBlack dark:bg-pumpkin w-full text-white"
+					className="w-full rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium h-11 transition-colors"
 					disabled={isLoading}
 				>
 					{isLoading ? <Spinner size="sm" /> : `Add Your Apartment`}

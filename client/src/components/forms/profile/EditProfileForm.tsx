@@ -98,7 +98,7 @@ export default function EditProfileForm() {
 					register={register}
 					errors={errors}
 					placeholder="Username"
-					startIcon={<UserCheck2 className="dark:text-babyPowder size-8" />}
+					startIcon={<UserCheck2 className="size-5 text-blue-500" />}
 				/>
 
 				<FormFieldComponent
@@ -107,7 +107,7 @@ export default function EditProfileForm() {
 					register={register}
 					errors={errors}
 					placeholder="First Name"
-					startIcon={<Contact2Icon className="dark:text-babyPowder size-8" />}
+					startIcon={<Contact2Icon className="size-5 text-blue-500" />}
 				/>
 				<FormFieldComponent
 					label="Last Name"
@@ -115,7 +115,7 @@ export default function EditProfileForm() {
 					register={register}
 					errors={errors}
 					placeholder="Last Name"
-					startIcon={<Contact2Icon className="dark:text-babyPowder size-8" />}
+					startIcon={<Contact2Icon className="size-5 text-blue-500" />}
 				/>
 				<GenderSelectField setValue={setValue} control={control} />
 				<OccupationSelectField setValue={setValue} control={control} />
@@ -125,7 +125,7 @@ export default function EditProfileForm() {
 					register={register}
 					errors={errors}
 					placeholder="What's your country"
-					startIcon={<Map className="dark:text-babyPowder size-8" />}
+					startIcon={<Map className="size-5 text-blue-500" />}
 				/>
 
 				<FormFieldComponent
@@ -134,7 +134,7 @@ export default function EditProfileForm() {
 					register={register}
 					errors={errors}
 					placeholder="City"
-					startIcon={<MapPinnedIcon className="dark:text-babyPowder size-8" />}
+					startIcon={<MapPinnedIcon className="size-5 text-blue-500" />}
 				/>
 
 				<FormFieldComponent
@@ -145,14 +145,17 @@ export default function EditProfileForm() {
 					placeholder="Bio"
 					isTextArea
 				/>
-				<Label className="h4-semibold dark:text-babyPowder" htmlFor="avatar">
+				<Label
+					className="text-sm font-semibold text-gray-700 dark:text-gray-300"
+					htmlFor="avatar"
+				>
 					Avatar
 				</Label>
 				<div className="flex w-full cursor-pointer items-center">
 					<div className="grow" style={{ maxWidth: "90%" }}>
 						<Input
 							accept="image/*"
-							className="file:bg-eerieBlack dark:border-platinum dark:text-platinum cursor-pointer file:mr-3 file:rounded-md file:text-lime-500"
+							className="file:bg-blue-600 cursor-pointer file:mr-3 file:rounded-md file:text-white dark:text-gray-300 dark:border-gray-800"
 							id="avatar"
 							name="avatar"
 							type="file"
@@ -167,7 +170,7 @@ export default function EditProfileForm() {
 				</div>
 				<Button
 					type="submit"
-					className="h4-semibold bg-eerieBlack dark:bg-pumpkin mt-2 w-full text-white"
+					className="mt-2 w-full rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium h-11 transition-colors"
 					disabled={isLoading}
 				>
 					{isLoading ? <Spinner size="sm" /> : `Update Profile`}

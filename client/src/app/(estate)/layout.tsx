@@ -9,15 +9,13 @@ interface LayoutProps {
 
 export default function layout({ children }: LayoutProps) {
 	return (
-		<main className="bg-baby_veryBlack relative">
+		<main className="bg-gray-50 dark:bg-gray-950 relative min-h-screen">
 			<Navbar />
 			<div className="flex">
-				{/* placeholder LeftNavbar component */}
 				<LeftNavbar />
-				<section className="flex min-h-screen flex-1 flex-col px-4 pb-6 pt-24 sm:px-6 lg:px-8 lg:pt-32">
-					<div>{children}</div>
+				<section className="flex min-h-screen flex-1 flex-col px-4 pb-8 pt-20 sm:px-6 lg:px-8 lg:pt-24">
+					<div className="max-w-4xl mx-auto w-full">{children}</div>
 				</section>
-				{/* placeholder right navbar component */}
 				<RightNavbar />
 			</div>
 		</main>

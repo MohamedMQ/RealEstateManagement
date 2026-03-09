@@ -80,7 +80,7 @@ export default function CreateIssueForm() {
 					register={register}
 					errors={errors}
 					placeholder="Issue Title"
-					startIcon={<FlagIcon className="dark:text-babyPowder size-8" />}
+					startIcon={<FlagIcon className="size-5 text-blue-500" />}
 				/>
 				<FormFieldComponent
 					label="Description"
@@ -89,10 +89,10 @@ export default function CreateIssueForm() {
 					errors={errors}
 					placeholder="Detailed Description of the issue"
 					isTextArea
-					startIcon={<FlagIcon className="dark:text-babyPowder size-8" />}
+					startIcon={<FlagIcon className="size-5 text-blue-500" />}
 				/>
 				<div>
-					<label htmlFor="Status" className="h4-semibold dark:text-babyPowder">
+					<label htmlFor="Status" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
 						Status
 					</label>
 					<div className="mt-1 flex items-center space-x-3 text-sm">
@@ -123,7 +123,7 @@ export default function CreateIssueForm() {
 				</div>
 
 				<div>
-					<label htmlFor="Status" className="h4-semibold dark:text-babyPowder">
+					<label htmlFor="Status" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
 						Priority
 					</label>
 					<div className="mt-1 flex items-center space-x-3 text-sm">
@@ -156,7 +156,7 @@ export default function CreateIssueForm() {
 				</div>
 				<Button
 					type="submit"
-					className="h4-semibold bg-eerieBlack dark:bg-pumpkin mt-2 w-full text-white"
+					className="mt-2 w-full rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium h-11 transition-colors"
 					disabled={isLoading}
 				>
 					{isLoading ? <Spinner size="sm" /> : `Report`}

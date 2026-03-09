@@ -64,7 +64,7 @@ export default function UpdateIssueForm({ params }: UpdateParamsProps) {
 				className="flex w-full max-w-md flex-col gap-4 dark:text-black"
 			>
 				<div>
-					<label htmlFor="Status" className="h4-semibold dark:text-babyPowder">
+					<label htmlFor="Status" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
 						Status
 					</label>
 					<div className="mt-1 flex items-center space-x-3 text-sm">
@@ -96,7 +96,7 @@ export default function UpdateIssueForm({ params }: UpdateParamsProps) {
 
 				<Button
 					type="submit"
-					className="h4-semibold bg-eerieBlack dark:bg-pumpkin mt-2 w-full text-white"
+					className="mt-2 w-full rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium h-11 transition-colors"
 					disabled={isLoading}
 				>
 					{isLoading ? <Spinner size="sm" /> : `Update Status`}

@@ -33,42 +33,44 @@ export default function AuthAvatar() {
 			{profile && (
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
-						<Avatar className="border-pumpkin cursor-pointer border-2">
+						<Avatar className="cursor-pointer size-9 ring-2 ring-blue-400/50 ring-offset-2 ring-offset-white dark:ring-offset-gray-950 hover:ring-blue-500/70 transition-all">
 							<AvatarImage alt="auth image" src={profile.avatar} />
-							<AvatarFallback>
-								<CircleUser className="dark:text-platinum size-8" />
+							<AvatarFallback className="bg-blue-600">
+								<CircleUser className="text-white size-5" />
 							</AvatarFallback>
 						</Avatar>
 					</DropdownMenuTrigger>
 
-					<DropdownMenuContent className="dark:text-platinum">
-						<DropdownMenuLabel className="border-b-2">
-							Manage Account
+					<DropdownMenuContent className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg p-1 min-w-[180px]">
+						<DropdownMenuLabel className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider px-3 pb-2 border-b border-gray-100 dark:border-gray-800">
+							My Account
 						</DropdownMenuLabel>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem className="auth-nav">
-							<Link href="/profile" className="flex-row-center">
-								<User className="mr-1" /> My Profile
+						<DropdownMenuSeparator className="bg-transparent" />
+						<DropdownMenuItem className="rounded-md cursor-pointer text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100">
+							<Link href="/profile" className="flex items-center gap-2 w-full">
+								<User className="size-4" /> My Profile
 							</Link>
 						</DropdownMenuItem>
 
-						<DropdownMenuItem className="auth-nav">
-							<Link href="/tenants" className="flex-row-center">
-								<Users className="mr-1" /> Tenants
+						<DropdownMenuItem className="rounded-md cursor-pointer text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100">
+							<Link href="/tenants" className="flex items-center gap-2 w-full">
+								<Users className="size-4" /> Tenants
 							</Link>
 						</DropdownMenuItem>
 
-						<DropdownMenuItem className="auth-nav">
-							<Link href="/bookmarks" className="flex-row-center">
-								<BookMarked className="mr-1" /> My Bookmarks
+						<DropdownMenuItem className="rounded-md cursor-pointer text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100">
+							<Link href="/bookmark" className="flex items-center gap-2 w-full">
+								<BookMarked className="size-4" /> My Bookmarks
 							</Link>
 						</DropdownMenuItem>
+
+						<DropdownMenuSeparator className="bg-gray-100 dark:bg-gray-800 my-1" />
 
 						<DropdownMenuItem
 							onClick={handleLogout}
-							className="flex-row-center auth-nav cursor-pointer"
+							className="rounded-md cursor-pointer text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 hover:text-red-700 flex items-center gap-2"
 						>
-							<LogOut className="mr-1" /> Log Out
+							<LogOut className="size-4" /> Log Out
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

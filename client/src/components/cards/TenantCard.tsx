@@ -5,13 +5,6 @@ import { useTheme } from "next-themes";
 import React from "react";
 import Spinner from "../shared/Spinner";
 import UsersSearch from "../shared/search/UsersSearch";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "../ui/card";
 import TenantInfo from "./TenantInfo";
 import {
 	BrickWall,
@@ -20,6 +13,7 @@ import {
 	CalendarDays,
 	Map,
 	School,
+	Users,
 } from "lucide-react";
 import { formatDate } from "@/utils";
 import ProtectedRoute from "../shared/ProtectedRoutes";
@@ -46,56 +40,64 @@ function TenantCardContent() {
 	}
 
 	return (
-		<div>
-			<UsersSearch />
-			<h1 className="flex-center font-robotoSlab dark:text-pumpkin text-4xl sm:text-5xl">
-				All Tenants - ({data?.profiles.results.length})
-			</h1>
+		<div className="animate-fade-in-up">
+			<div className="mb-6">
+				<h1 className="font-bold text-3xl sm:text-4xl text-gray-900 dark:text-white">
+					All Tenants
+				</h1>
+				<p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
+					{data?.profiles.results.length ?? 0} residents in the community
+				</p>
+			</div>
 
-			<div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+			<UsersSearch />
+
+			<div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 				{data && data.profiles.results.length > 0 ? (
 					data.profiles.results.map((tenant) => (
-						<Card key={tenant.id}>
-							<CardContent className="rounded-lg p-4">
-								<CardHeader className="flex-col-center text-center">
-									<Avatar className="border-pumpkin mx-auto size-28 overflow-hidden rounded-full border-4 object-cover">
-										<AvatarImage
-											alt="User profile avatar"
-											src={
-												tenant.avatar ||
-												(theme === "dark"
-													? "/assets/icons/user-profile-circle.svg"
-													: "/assets/icons/user-profile-light-circle.svg")
-											}
-										/>
-									</Avatar>
-									<CardTitle className="h3-semibold font-robotoSlab dark:text-platinum">
+						<div
+							key={tenant.id}
+							className="group bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md hover:border-gray-300 dark:hover:border-gray-700 transition-all duration-200"
+						>
+							<div className="p-5">
+								<div className="flex flex-col items-center text-center mb-4">
+									<div className="relative mb-3">
+										<Avatar className="relative size-20 ring-2 ring-blue-400/50 ring-offset-2 ring-offset-white dark:ring-offset-gray-900">
+											<AvatarImage
+												alt="User profile avatar"
+												src={
+													tenant.avatar ||
+													(theme === "dark"
+														? "/assets/icons/user-profile-circle.svg"
+														: "/assets/icons/user-profile-light-circle.svg")
+												}
+											/>
+										</Avatar>
+									</div>
+									<h3 className="font-semibold text-gray-900 dark:text-white text-base">
 										{tenant.full_name}
-									</CardTitle>
-								</CardHeader>
-								<CardTitle className="flex-center">
-									<p className="h4-semibold dark:text-lime-500">
+									</h3>
+									<p className="text-sm font-medium text-blue-600 dark:text-blue-400">
 										@{tenant.username}
 									</p>
-								</CardTitle>
-								<CardDescription className="mt-4 space-y-2 border-b-0">
-									<div>
-										<TenantInfo
-											label="Country of Origin"
-											value={tenant.country_of_origin}
-											icon={Map}
-										/>
-										<TenantInfo
-											label="Occupation"
-											value={tenant.occupation}
-											icon={Briefcase}
-										/>
-										<TenantInfo
-											label="Date Joined"
-											value={formatDate(tenant.date_joined).toString()}
-											icon={CalendarDays}
-										/>
-									</div>
+								</div>
+
+								<div className="space-y-1.5 border-t border-gray-100 dark:border-gray-800 pt-4">
+									<TenantInfo
+										label="Country"
+										value={tenant.country_of_origin}
+										icon={Map}
+									/>
+									<TenantInfo
+										label="Occupation"
+										value={tenant.occupation}
+										icon={Briefcase}
+									/>
+									<TenantInfo
+										label="Joined"
+										value={formatDate(tenant.date_joined).toString()}
+										icon={CalendarDays}
+									/>
 									{tenant.apartment && (
 										<>
 											<TenantInfo
@@ -104,26 +106,35 @@ function TenantCardContent() {
 												icon={Building}
 											/>
 											<TenantInfo
-												label="Apartment Floor"
+												label="Floor"
 												value={tenant.apartment.floor}
 												icon={School}
 											/>
 											<TenantInfo
-												label="Unit Number"
+												label="Unit"
 												value={tenant.apartment.unit_number}
 												icon={BrickWall}
 											/>
 										</>
 									)}
-								</CardDescription>
-							</CardContent>
-						</Card>
+								</div>
+							</div>
+						</div>
 					))
 				) : (
-					<p>No tenants found</p>
+					<div className="col-span-3 flex flex-col items-center justify-center py-20 text-center">
+						<div className="size-16 rounded-lg bg-blue-50 dark:bg-blue-950/30 flex items-center justify-center mb-4">
+							<Users className="size-8 text-blue-500 dark:text-blue-400" />
+						</div>
+						<p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+							No tenants found
+						</p>
+					</div>
 				)}
 			</div>
-			<PaginationSection totalPages={totalPages} entityType="user" />
+			<div className="mt-8">
+				<PaginationSection totalPages={totalPages} entityType="user" />
+			</div>
 		</div>
 	);
 }

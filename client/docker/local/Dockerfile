@@ -1,8 +1,8 @@
-FROM docker.io/node:20.11-alpine3.18 as base
+FROM docker.io/node:20-alpine as base
 
 FROM base as node-build-stage
 
-RUN apk add --no-cache libc6-compat
+RUN apk update && apk add --no-cache libc6-compat
 
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
@@ -22,7 +22,7 @@ COPY --from=node-build-stage /node_modules ./node_modules
 
 COPY . ${APP_HOME}
 
-RUN apk add --no-cache sudo && \
+RUN apk update && apk add --no-cache sudo && \
   addgroup -g 1001 -S nodejs && \
   adduser -S nextjs -u 1001 -G nodejs && \
   echo "nextjs ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \

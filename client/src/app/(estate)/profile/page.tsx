@@ -20,62 +20,70 @@ export const metadata: Metadata = {
 
 function ProfilePageContent() {
 	return (
-		<>
-			<div className="grid items-start gap-4 px-4 pb-4 md:gap-6 md:px-6">
-				<Header />
+		<div className="space-y-6 px-4 pb-6 md:px-6">
+			<Header />
 
-				{/* the tabs */}
-				<div className="w-full">
-					<Tabs
-						className="dark:border-eerieBlack rounded-lg border"
-						defaultValue="about"
-					>
-						<TabsList className="bg-baby_rich flex space-x-4">
-							<TabsTrigger value="about" className="h3-semibold tab">
-								About
-							</TabsTrigger>
-							<TabsTrigger value="posts" className="h3-semibold tab">
-								Posts
-							</TabsTrigger>
-							<TabsTrigger value="my-issues" className="h3-semibold tab">
-								My Issues
-							</TabsTrigger>
-							<TabsTrigger value="my-reports" className="h3-semibold tab">
-								My Reports
-							</TabsTrigger>
-							<TabsTrigger value="assigned-issues" className="h3-semibold tab">
-								Assigned Issues
-							</TabsTrigger>
-						</TabsList>
+			<div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 overflow-hidden">
+				<Tabs defaultValue="about">
+					<TabsList className="w-full rounded-none border-b border-gray-200 dark:border-gray-800 bg-transparent h-auto p-0 flex flex-wrap">
+						<TabsTrigger
+							value="about"
+							className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 px-5 py-3 font-medium text-sm"
+						>
+							About
+						</TabsTrigger>
+						<TabsTrigger
+							value="posts"
+							className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 px-5 py-3 font-medium text-sm"
+						>
+							Posts
+						</TabsTrigger>
+						<TabsTrigger
+							value="my-issues"
+							className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 px-5 py-3 font-medium text-sm"
+						>
+							My Issues
+						</TabsTrigger>
+						<TabsTrigger
+							value="my-reports"
+							className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 px-5 py-3 font-medium text-sm"
+						>
+							My Reports
+						</TabsTrigger>
+						<TabsTrigger
+							value="assigned-issues"
+							className="rounded-none border-b-2 border-transparent data-[state=active]:border-blue-600 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 px-5 py-3 font-medium text-sm"
+						>
+							Assigned Issues
+						</TabsTrigger>
+					</TabsList>
 
-						{/* about tabs content */}
+					<div className="p-5">
 						<About />
-
-						{/* posts tab content */}
 						<Posts />
-
-						{/* issue tab content */}
 						<Issues />
-						{/* report tab content */}
 						<Reports />
-						{/* assigned Issue tab content */}
 						<AssignedIssues />
-					</Tabs>
-				</div>
+					</div>
+				</Tabs>
 			</div>
-			<div className="flex cursor-pointer flex-row justify-between">
+
+			<div className="flex flex-col sm:flex-row gap-3">
 				<Link href="/profile/edit">
-					<Button className="h3-semibold electricIndigo-gradient text-babyPowder w-64 rounded-lg">
+					<Button className="rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium w-full sm:w-auto px-8 transition-colors">
 						Update Profile
 					</Button>
 				</Link>
 				<Link href="/apartment">
-					<Button className="h3-semibold electricIndigo-gradient text-babyPowder w-64 rounded-lg">
+					<Button
+						variant="outline"
+						className="rounded-lg border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium w-full sm:w-auto px-8"
+					>
 						Add Your Apartment
 					</Button>
 				</Link>
 			</div>
-		</>
+		</div>
 	);
 }
 

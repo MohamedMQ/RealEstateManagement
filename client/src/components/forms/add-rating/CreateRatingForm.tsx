@@ -65,10 +65,10 @@ export default function CreateRatingForm() {
 					name="rated_user_username"
 					register={register}
 					errors={errors}
-					startIcon={<UserCog className="dark:text-babyPowder size-8" />}
+					startIcon={<UserCog className="size-5 text-blue-500" />}
 					disabled
 				/>
-				<label htmlFor="rating" className="h4-semibold dark:text-babyPowder">
+				<label htmlFor="rating" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
 					{" "}
 					Rating{" "}
 				</label>
@@ -99,7 +99,7 @@ export default function CreateRatingForm() {
 				/>
 				<Button
 					type="submit"
-					className="h4-semibold bg-eerieBlack dark:bg-pumpkin w-full text-white"
+					className="w-full rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium h-11 transition-colors"
 					disabled={isLoading}
 				>
 					{isLoading ? <Spinner size="sm" /> : `Add Rating`}

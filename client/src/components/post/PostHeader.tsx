@@ -1,6 +1,5 @@
 import { useTheme } from "next-themes";
 import React from "react";
-import { CardDescription, CardTitle } from "../ui/card";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { ClockIcon, EyeIcon } from "lucide-react";
 import { formatDistanceToNow, parseISO } from "date-fns";
@@ -23,38 +22,37 @@ export default function PostHeader({
 	const { theme } = useTheme();
 
 	return (
-		<>
-			<CardTitle className="dark:text-platinum">
-				<p className="flex items-center space-x-2">
-					<Avatar>
-						<AvatarImage
-							src={
-								avatar ??
-								(theme === "dark"
-									? "/assets/icons/user-profile-circle.svg"
-									: "/assets/icons/user-profile-light-circle.svg")
-							}
-							alt="Author Avatar"
-							className="border-electricIndigo dark:border-pumpkin size-8 rounded-full border-2 sm:size-10"
-						/>
-					</Avatar>
-					<span className="text-2xl">@{author_username}</span>
-				</p>
-			</CardTitle>
+		<div className="flex items-center justify-between flex-wrap gap-3">
+			<div className="flex items-center gap-3">
+				<Avatar className="ring-2 ring-blue-400/50 ring-offset-1 ring-offset-white dark:ring-offset-gray-900">
+					<AvatarImage
+						src={
+							avatar ??
+							(theme === "dark"
+								? "/assets/icons/user-profile-circle.svg"
+								: "/assets/icons/user-profile-light-circle.svg")
+						}
+						alt="Author Avatar"
+						className="size-10 rounded-full object-cover"
+					/>
+				</Avatar>
+				<span className="font-semibold text-gray-800 dark:text-white text-lg">
+					@{author_username}
+				</span>
+			</div>
 
-			<CardDescription className="mt-2">
-				<p className="flex items-center space-x-2">
-					<ClockIcon className="tab-icon text-electricIndigo hidden sm:block" />
-					<span className="text-xl-font-baby">
-						<span className="mr-1">Posted</span>
-						{created_at
-							? formatDistanceToNow(parseISO(created_at), { addSuffix: true })
-							: "Loading..."}
-					</span>
-					<EyeIcon className="tab-icon text-electricIndigo" />
-					<span className="text-xl-font-baby">{getViewText(view_count)}</span>
-				</p>
-			</CardDescription>
-		</>
+			<div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+				<span className="flex items-center gap-1.5">
+					<ClockIcon className="size-4 text-blue-500 dark:text-blue-400" />
+					{created_at
+						? formatDistanceToNow(parseISO(created_at), { addSuffix: true })
+						: "Loading..."}
+				</span>
+				<span className="flex items-center gap-1.5">
+					<EyeIcon className="size-4 text-blue-500 dark:text-blue-400" />
+					{getViewText(view_count)}
+				</span>
+			</div>
+		</div>
 	);
 }

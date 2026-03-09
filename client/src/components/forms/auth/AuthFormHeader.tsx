@@ -15,18 +15,20 @@ export default function AuthFormHeader({
 	linkText,
 }: FormHeaderProps) {
 	return (
-		<div className="px-4 sm:mx-auto sm:w-full sm:max-w-md sm:px-6 lg:px-8">
-			<HomeModernIcon className="mx-auto size-16 dark:text-lime-500" />
-			<h2 className="text-baby_richBlack h2-bold font-robotoSlab dark:text-pumpkin mt-3 text-center">
+		<div className="text-center mb-6">
+			<div className="inline-flex items-center justify-center size-14 rounded-lg bg-blue-600 shadow-md mb-4">
+				<HomeModernIcon className="size-8 text-white" />
+			</div>
+			<h2 className="font-bold text-2xl sm:text-3xl text-gray-900 dark:text-white">
 				{title}
 			</h2>
 			{(staticText || linkText) && linkHref && (
-				<p className="dark:text-platinum mt-4 text-center text-lg">
-					{staticText && <span>{staticText}</span>}
+				<p className="mt-3 text-gray-500 dark:text-gray-400 text-sm">
+					{staticText && <span>{staticText} </span>}
 					{linkText && (
 						<Link
 							href={linkHref}
-							className="ml-1 font-semibold text-indigo-600 hover:text-indigo-500 dark:text-lime-500 dark:hover:text-indigo-500"
+							className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors"
 						>
 							{linkText}
 						</Link>

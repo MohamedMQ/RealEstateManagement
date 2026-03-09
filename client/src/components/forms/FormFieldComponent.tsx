@@ -53,7 +53,7 @@ export function FormFieldComponent<TFieldValues extends FieldValues>({
 				<Textarea
 					{...register(name, { required })}
 					placeholder={placeholder}
-					className={`dark:text-babyPowder ${className}`}
+					className={`dark:text-gray-100 rounded-lg border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:border-blue-500 focus:ring-blue-500/20 ${className}`}
 				/>
 			);
 		} else if (isPassword) {
@@ -61,6 +61,7 @@ export function FormFieldComponent<TFieldValues extends FieldValues>({
 				<PasswordInput
 					{...register(name, { required })}
 					placeholder={placeholder}
+					className={`dark:text-gray-100 rounded-lg border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:border-blue-500 focus:ring-blue-500/20 ${className}`}
 				/>
 			);
 		} else {
@@ -73,7 +74,7 @@ export function FormFieldComponent<TFieldValues extends FieldValues>({
 					startIcon={startIcon}
 					endIcon={endIcon}
 					disabled={disabled}
-					className={`dark:text-babyPowder ${className}`}
+					className={`dark:text-gray-100 rounded-lg border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:border-blue-500 focus:ring-blue-500/20 ${className}`}
 				/>
 			);
 		}
@@ -81,14 +82,17 @@ export function FormFieldComponent<TFieldValues extends FieldValues>({
 
 	return (
 		<div>
-			<div className="mb-1 flex justify-between">
-				<label htmlFor={name} className="h4-semibold dark:text-babyPowder mb-1">
+			<div className="mb-1.5 flex justify-between items-center">
+				<label
+					htmlFor={name}
+					className="text-sm font-semibold text-gray-700 dark:text-gray-300"
+				>
 					{label}
 				</label>
 				{link && (
 					<Link
 						href={link.linkUrl}
-						className="h4-semibold cursor-pointer hover:text-indigo-500 dark:text-lime-500 dark:hover:text-indigo-500"
+						className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors"
 					>
 						{link.linkText}
 					</Link>
@@ -96,7 +100,9 @@ export function FormFieldComponent<TFieldValues extends FieldValues>({
 			</div>
 			<div className="mt-1">{renderInputComponent()}</div>
 			{errorMessage && (
-				<span className="mt-2 text-sm text-red-500">{errorMessage}</span>
+				<span className="mt-1.5 text-xs font-medium text-red-500 flex items-center gap-1">
+					{errorMessage}
+				</span>
 			)}
 		</div>
 	);

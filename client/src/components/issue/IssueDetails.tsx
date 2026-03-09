@@ -10,15 +10,13 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "react-toastify";
 import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "../ui/card";
-import { AuthFormHeader } from "../forms/auth";
-import { CheckCheck, CircleDot, EyeIcon, Hotel } from "lucide-react";
+	CheckCheck,
+	CircleDot,
+	Eye,
+	Hotel,
+	PenLine,
+	Trash2,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 
@@ -55,91 +53,111 @@ export default function IssueDetails({ params }: IssueDetailsProps) {
 		}
 	};
 	return (
-		<Card className="dark:border-gray rounded-xl border border-dashed">
-			<AuthFormHeader
-				title={issue?.title}
-				linkText="Go back to profile"
-				linkHref="/profile"
-			/>
-
-			<CardHeader className="border-b-eerieBlack flex flex-row justify-between gap-4 border-b p-4 sm:p-6 md:flex-row md:items-center md:gap-6 ">
-				<div className="grid gap-0.5">
-					<CardTitle className="dark:text-platinum">
-						<p className="flex items-center space-x-2">
-							<Hotel className="tab-icon" />
-							<span className="dark:text-babyPowder font-bold">
-								Apartment Number:{" "}
-							</span>
-							<span className="text-2xl">{issue?.apartment_unit}</span>
-						</p>
-					</CardTitle>
-
-					<CardDescription className="mt-2">
-						<p className="flex items-center space-x-2">
-							<CheckCheck className="tab-icon" />
-							<span className="text-xl-font-baby">Occupied By: </span>
-							<span className="text-xl-font-baby">{issue?.reported_by}</span>
-						</p>
-					</CardDescription>
-				</div>
-
-				<div className="flex flex-col gap-y-3">
-					{canUpdate && (
-						<Link href={`/issue/update-issue/${id}`}>
-							<Button
-								className="bg-electricIndigo text-babyPowder dark:bg-electricIndigo dark:text-babyPowder ml-auto h-10 max-w-[200px] sm:ml-0 md:max-w-[300px]"
-								size="sm"
-								variant="outline"
-							>
-								Update Issue
-							</Button>
-						</Link>
-					)}
-
-					{canDelete && (
-						<Button
-							onClick={handleDeleteIssue}
-							className="text-babyPowder dark:text-babyPowder ml-auto h-10 max-w-[200px] bg-red-500 sm:ml-0 md:max-w-[300px] dark:bg-red-500"
-							size="sm"
-							variant="outline"
+		<div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-card-hover">
+			<div className="px-6 pt-6 pb-4 border-b border-gray-100 dark:border-gray-800">
+				<div className="flex items-center justify-between gap-4 flex-wrap">
+					<div>
+						<h1 className="text-xl font-bold text-gray-900 dark:text-white">
+							{issue?.title}
+						</h1>
+						<Link
+							href="/profile"
+							className="text-sm text-blue-600 hover:text-blue-600 mt-1 inline-block"
 						>
-							Delete Issue
-						</Button>
-					)}
-				</div>
-			</CardHeader>
-
-			<CardContent className="border-b-eerieBlack border-b">
-				<CardDescription className="mt-3">
-					<div className="flex items-center space-x-2">
-						<CircleDot className="tab-icon" />
-						<span className="text-xl-font-baby">{issue?.description}</span>
+							← Go back to profile
+						</Link>
 					</div>
-				</CardDescription>
-			</CardContent>
+					<div className="flex gap-2">
+						{canUpdate && (
+							<Link href={`/issue/update-issue/${id}`}>
+								<Button
+									size="sm"
+									className="rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors flex items-center gap-1.5"
+								>
+									<PenLine className="size-4" />
+									Update Issue
+								</Button>
+							</Link>
+						)}
+						{canDelete && (
+							<Button
+								onClick={handleDeleteIssue}
+								size="sm"
+								className="rounded-lg bg-red-500 hover:bg-red-600 text-white font-medium flex items-center gap-1.5"
+							>
+								<Trash2 className="size-4" />
+								Delete Issue
+							</Button>
+						)}
+					</div>
+				</div>
+			</div>
 
-			<CardFooter className="mt-2 flex flex-row justify-between dark:text-lime-500">
-				<p className="text-lg">
-					assigned to:
-					<span className="dark:text-platinum">
-						{issue?.assigned_to || "Not assigned Yet!"}
+			<div className="px-6 py-5 grid gap-4 sm:grid-cols-2 border-b border-gray-100 dark:border-gray-800">
+				<div className="flex items-center gap-3">
+					<div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-600/10">
+						<Hotel className="size-4 text-blue-600" />
+					</div>
+					<div>
+						<p className="text-xs text-gray-500 dark:text-gray-400">
+							Apartment Number
+						</p>
+						<p className="font-semibold text-gray-800 dark:text-white">
+							{issue?.apartment_unit}
+						</p>
+					</div>
+				</div>
+				<div className="flex items-center gap-3">
+					<div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-600/10">
+						<CheckCheck className="size-4 text-blue-600" />
+					</div>
+					<div>
+						<p className="text-xs text-gray-500 dark:text-gray-400">
+							Reported By
+						</p>
+						<p className="font-semibold text-gray-800 dark:text-white">
+							{issue?.reported_by}
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div className="px-6 py-5 border-b border-gray-100 dark:border-gray-800">
+				<div className="flex items-start gap-3">
+					<div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-50 dark:bg-accent-500/10 mt-0.5">
+						<CircleDot className="size-4 text-accent-500" />
+					</div>
+					<div>
+						<p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+							Description
+						</p>
+						<p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+							{issue?.description}
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div className="px-6 py-4 flex flex-wrap gap-4 items-center justify-between text-sm">
+				<div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-400">
+					<span className="font-medium">Assigned to:</span>
+					<span className="text-blue-600 font-semibold">
+						{issue?.assigned_to || "Not assigned yet"}
 					</span>
-				</p>
-				<p className="text-lg">
-					Status:
-					<span className="dark:text-platinum">{issue?.status}</span>
-				</p>
-				<p className="text-lg">
-					Priority:
-					<span className="dark:text-platinum">{issue?.priority}</span>
-				</p>
-				<p className="flex flex-row items-center">
-					<EyeIcon className="mr-1 size-5" />
-					<span className="dark:text-platinum text-lg">
-						View Count: {issue?.view_count}
+				</div>
+				<div className="flex items-center gap-4">
+					<span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-600/10 text-blue-600 dark:text-blue-500">
+						{issue?.status}
 					</span>
-				</p>
-			</CardFooter>
-		</Card>
+					<span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400">
+						{issue?.priority}
+					</span>
+					<span className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
+						<Eye className="size-4" />
+						{issue?.view_count}
+					</span>
+				</div>
+			</div>
+		</div>
 	);
 }
